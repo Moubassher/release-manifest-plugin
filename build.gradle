@@ -1,9 +1,11 @@
 plugins {
     id 'groovy'
     id 'java-gradle-plugin'
+
+    id 'maven-publish'
 }
 
-group = 'com.moubassher.release-manifest'
+group = 'com.moubassher.gradle-plugins'
 version = '1.0.0'
 
 repositories {
@@ -30,6 +32,15 @@ dependencies {
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId = 'release-manifest-plugin'  // explicit artifact name
+        }
+    }
 }
 
 test {
