@@ -1,0 +1,37 @@
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+}
+
+group = 'com.moubassher.release-manifest'
+version = '1.0.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+
+gradlePlugin {
+    plugins {
+        releaseManifestGenerator {
+            id = 'com.moubassher.release-manifest-generator'
+            implementationClass = 'com.moubassher.manifestplugin.ReleaseManifestPlugin'
+        }
+    }
+}
+
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:5.0.0'
+
+    implementation gradleApi()
+    implementation localGroovy()
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
